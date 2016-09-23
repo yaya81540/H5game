@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>弹跳球游戏</title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+		</style>
+	</head>
+	<body>
+		<div style="position: relative;margin: 0 auto;height: 420px;width: 520px;">
+			<canvas id="ttq" width="500px" height="400px" style="border: 10px solid #000;"></canvas>
+			<div id="hk" style="width: 100px;height: 10px;background: #00f;position: absolute;bottom: 10px;left: 10px;"></div>
+		</div>
+		<div style="text-align: center;margin-top: 20px;"><button>开始</button> <button>暂停</button></div>
+		<script type="text/javascript">
+			var btn=document.getElementsByTagName('button'),
+				c=document.getElementById('ttq'),
+				odiv=document.getElementById('hk');
+			var l=0,v=[],adr=[c.width/2,80];
+			btn[0].onclick=function(){
+				document.onmousemove=function(ev){
+					var ev=ev||window.event;
+					if(ev.clientX<=(document.documentElement.clientWidth-c.width)/2){
+						l=0;
+					}else if(ev.clientX>=(document.documentElement.clientWidth+c.width)/2-parseInt(odiv.style.width)){
+						l=parseInt(c.width)-parseInt(odiv.style.width);
+					}else{
+						l=c.width/2-(document.documentElement.clientWidth/2-ev.clientX);
+					}
+					odiv.style.left=10+l+'px';
+				}
+				v=[Math.floor(Math.random()*3)+1,Math.floor(Math.random()*3)+1]
+				var div1=new Ttq('ttq');
+				div1.init()
+				
+			}
+			function Ttq(id){
+				this.c=document.getElementById(id);
+				this.cx=this.c.getContext('2d');
+				this.widthX=this.c.width;
+				this.heightX=this.c.height;
+				this.btn=document.getElementsByTagName('button');
+				this.odiv=document.getElementById('hk');
+			}
+			Ttq.prototype.init=function(){
+				var that=this;
+				clearInterval(this.timer);
+				this.cx.fillStyle='#f00';
+				this.timer=setInterval(function(){
+					that.cx.clearRect(0,0,that.widthX,that.widthX);
+					for(var i=0;i<2;i++){
+						adr[i]+=v[i];
+					}
+					that.cx.beginPath();
+					that.cx.arc(adr[0],adr[1],10,0,Math.PI*2,true);
+					that.cx.closePath();
+					that.cx.fill();
+					that.judge();
+				},10);
+				this.btn[1].onclick=function(){
+					clearInterval(that.timer);
+					document.onmousemove=null;
+				}
+			}
+			Ttq.prototype.judge=function(){
+				if(adr[0]+10>=this.widthX||adr[0]-10<=0){
+					v[0]=-v[0];
+				}
+				if(adr[1]-10<=0){
+					v[1]=-v[1];
+				}
+				if(adr[1]+10>=this.heightX-10){
+					if(adr[0]+10>parseInt(this.odiv.style.left)&&adr[0]+10<parseInt(this.odiv.style.left)+parseInt(this.odiv.style.width)){
+						v[1]=-v[1];
+					}else{
+						alert('you lose!');
+						clearInterval(this.timer);
+						document.onmousemove=null;
+						adr=[c.width/2,80];
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
