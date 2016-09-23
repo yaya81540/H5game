@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>骰子游戏</title>
+	</head>
+	<body>
+		<canvas id="tz1" width="100px" height="100px" style="border: 10px solid #000;"></canvas>
+		<canvas id="tz2" width="100px" height="100px" style="border: 10px solid #000;"></canvas>
+		<button>开始</button> <button>停止</button>
+		<div style="width:300px">
+			<p>crap游戏规则：</p>
+			<p>玩家抛出两个骰子，如果第一次抛出7或11，那么他就获胜。如果第一次抛出2、3或12，那么他就输了。</p>
+			<p>其他结果将会记录为玩家点数,然后玩家继续抛骰子，再抛出7就输了，如果正好又抛出玩家点数则获胜。</p>
+		</div>
+		<script type="text/javascript">
+			function Ztz(id){
+				this.c=document.getElementById(id);
+				this.cx=this.c.getContext('2d');
+				this.widthX=this.c.width;
+			}
+			Ztz.prototype.init=function(num){
+				this.cx.clearRect(0,0,this.widthX,this.widthX);
+				this.cx.fillStyle='#00f';
+				var centerX=this.widthX/2;
+				if(num==1){
+					this.cx.fillStyle='#f00';
+					this.cx.beginPath();
+					this.cx.arc(centerX,centerX,centerX/2,0,Math.PI*2,true);
+					this.cx.closePath();
+					this.cx.fill();
+				}else if(num==2){
+					this.cx.beginPath();
+					this.cx.arc(centerX/2,centerX/2,centerX/3,0,Math.PI*2,true);
+					this.cx.closePath();
+					this.cx.fill();
+					this.cx.beginPath();
+					this.cx.arc(centerX*3/2,centerX*3/2,centerX/3,0,Math.PI*2,true);
+					this.cx.closePath();
+					this.cx.fill();
+				}else if(num==3){
+					for(var i=1;i<=3;i++){
+						this.cx.beginPath();
+						this.cx.arc(centerX*i/2,centerX*i/2,centerX/4,0,Math.PI*2,true);
+						this.cx.closePath();
+						this.cx.fill();
+					}
+				}else if(num==4){
+					this.cx.fillStyle='#f00';
+					for(var i=0;i<2;i++){
+						for(var j=0;j<2;j++){
+							this.cx.beginPath();
+							this.cx.arc(centerX*(2*i+1)/2,centerX*(2*j+1)/2,centerX/3,0,Math.PI*2,true);
+							this.cx.closePath();
+							this.cx.fill();
+						}
+					}
+				}else if(num==5){					
+					for(var i=1;i<=3;i++){
+						this.cx.beginPath();
+						this.cx.arc(centerX*i/2,centerX*(4-i)/2,centerX/4,0,Math.PI*2,true);
+						this.cx.closePath();
+						this.cx.fill();
+						this.cx.beginPath();
+						this.cx.arc(centerX*i/2,centerX*i/2,centerX/4,0,Math.PI*2,true);
+						this.cx.closePath();
+						this.cx.fill();
+					}
+				}else if(num==6){
+					for(var i=1;i<=3;i++){
+						for(var j=1;j<=2;j++){
+							this.cx.beginPath();
+							this.cx.arc((centerX*2/3)*j,(centerX/2)*i,centerX/5,0,Math.PI*2,true);
+							this.cx.closePath();
+							this.cx.fill();
+						}
+					}
+				}
+				return num;
+			}
+			var tz1=new Ztz('tz1');
+			var tz2=new Ztz('tz2');
+			var btn=document.getElementsByTagName('button');
+			var timer=null;
+			var num1=num2=sum=last=null;
+			var first=true;
+			btn[0].onclick=function(){
+				last=sum;
+				clearInterval(timer);
+				timer=setInterval(function(){
+					num1=tz1.init(parseInt(Math.random()*5)+1);
+					num2=tz2.init(parseInt(Math.random()*5)+1);
+				},100);
+			}
+			btn[1].onclick=function(){
+				clearInterval(timer);
+				sum=num1+num2;
+				if(first){
+					if(sum==7||sum==11){
+						alert('you win!');
+					}else if(sum==2||sum==3||sum==12){
+						alert('you lose!');
+					}else{
+						first=false;
+					}
+				}else{
+					if(sum==7){
+						alert('you lose!');
+						first=true;
+					}else if(sum==last){
+						alert('you win!');
+						first=true;
+					}
+				}	
+			}
+		</script>
+	</body>
+</html>
