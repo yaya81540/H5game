@@ -3,22 +3,13 @@ document.getElementById('gamebox').style.height=clientHeight+'px';
 if(clientHeight<document.getElementById('game').offsetHeight){
 	document.getElementById('game').style.height=clientHeight+'px';
 }
-//url字符串
-function getQueryString(name){var reg=new RegExp("(^|&)"+name+"=([^&]*)(&|$)","i");var r=window.location.search.substr(1).match(reg);if(r!=null){return unescape(r[2])}return""};
-//获得cookie
-function getCookie(c){var d=document.cookie.split("; ");for(var b=0;b<d.length;b++){var a=d[b].split("=");if(a[0]==c){return unescape(a[1])}}}function clearCookie(a){addCookie(a,"",-1)};
 function debounce(a,c){var b=0;return function(){var d=+new Date();if(d-b>c){a.apply(this,arguments);b=d}}};
 /*
 * 自定义tip提示 2秒自动关闭
 * @param str {str}   传入的提示信息
 */	
 function showMsg(str,delay){var alert_msg=document.getElementById("alert_msg");var delay=delay?delay:2000;if(!alert_msg){return}alert_msg.addEventListener("click",function(e){alert_msg.className="";alert_msg.innerHTML="";alert_msg.setAttribute("data-state","false");e.stopPropagation()});if(alert_msg.getAttribute("data-state")=="false"){alert_msg.setAttribute("data-state","true");alert_msg.innerHTML=str;alert_msg.className="alert_msg_show";setTimeout(function(){alert_msg.className="";alert_msg.innerHTML="";alert_msg.setAttribute("data-state","false")},delay)}}
-var openid=getQueryString('openid')||getCookie('openid');
-var user_uuid=getQueryString('user_uuid')||getQueryString('m_uuid')||getQueryString('ux').substr(3,10)||getCookie('user_uuid');
 
-if(!openid||openid=='undefined'){
-	window.location.href='http://m.lrlz.com/h5/activity/arsoa/';
-}
 var clientWidth=document.documentElement.clientWidth
 //获得化肥皂盒
 var soapBox=document.getElementById('soapBox');
@@ -94,13 +85,12 @@ Wpdl.prototype.judge=function(){
 	}
 }
 //	刮开爱的抱抱
-function getlose(isFirst){
+function getlose(){
 	setTimeout(function(){
 		result.style.display='none';
 		lose.style.display='block';
 		var i=0;
-		console.log(isFirst)
-		if(isFirst>1)$('.sharechat').show();
+		$('.sharechat').show();
 		var losetimer=setInterval(function(){
 			var losechild=lose.children;
 			if(i<losechild.length){
@@ -114,13 +104,13 @@ function getlose(isFirst){
 }
 
 //获取结果
-function getResult(scoreNum,status,isFirst){
+function getResult(scoreNum){
 	var price='',picurl='',btnstr='',share='';
 	var haveprize='<p>(至安露莎天猫旗舰店使用)</p>';
 	if(scoreNum<80){
 		picurl='againchat';
-		price='<span class="price" style="width:1.36rem;margin-left: -0.4rem;" onclick="getlose('+isFirst+')" id="tolose"><img src="images/game/mark.png"></span>';
-		btnstr='<div class="result_btn"><span style="width:2.54rem;margin-top:1.1rem;" onclick="getlose('+isFirst+')"><img src="images/game/open.png"><span></div>'
+		price='<span class="price" style="width:1.36rem;margin-left: -0.4rem;" onclick="getlose()" id="tolose"><img src="images/game/mark.png"></span>';
+		btnstr='<div class="result_btn"><span style="width:2.54rem;margin-top:1.1rem;" onclick="getlose()"><img src="images/game/open.png"><span></div>'
 		haveprize='';
 	}else{
 		var mylink='form.html';
@@ -140,49 +130,17 @@ function getResult(scoreNum,status,isFirst){
 			price='<span class="price">150元优惠券</span>'
 			resultType=150;
 		}
-		if(isFirst>1)share='<div class="share"><img src="images/game/share.png"/></div>';
-		btnstr='<p>游戏奖励仅限领取1次，熟能生巧挑战更高分吧！</p><div class="result_btn"><span class="toShare" id="toShare" again="'+status+'"><img src="images/game/again.png"/></span><span><a href="'+mylink+'?resultType='+resultType+'&openid='+openid+'&user_uuid='+user_uuid+'"><img src="images/game/price.png"/></a></span></div>'
+		share='<div class="share"><img src="images/game/share.png"/></div>';
+		btnstr='<p>游戏奖励仅限领取1次，熟能生巧挑战更高分吧！</p><div class="result_btn"><span class="toShare" id="toShare" again="'+status+'"><img src="images/game/again.png"/></span><span><a href="javascript:;"><img src="images/game/price.png"/></a></span></div>'
 	}
 	document.getElementById('result').innerHTML='<div id="myscore"><img src="images/game/'+picurl+'.png" class="chat"/><span class="myscore">'+scoreNum+'</span>'+price+haveprize+'</div>'+btnstr+share
 	var tolose=document.getElementById('tolose');
 	var mylose=false;
 	if(tolose)tolose.addEventListener('touchmove',function(){if(!mylose){getlose(isFirst);mylose=true;}},false);
-	if(isFirst==1){
-		$('.toShare').click(debounce(function(){
-			startgame();
-		},320))
-	}else{
-		toshare();
-	}
+	$('.toShare').click(debounce(function(){
+		startgame();
+	},320))
 	
-}
-//上传分数
-function postScore(scoreNum){
-	$.ajax({
-		type:"post",
-//		url:"http://192.168.0.124:8080/app/inter/arsoa/add_arsoa.hh?appVer=3.2.0&appKey=6581235709&openid="+openid+"&score="+scoreNum,
-		url:"http://lrlzapp.wx.jaeapp.com/app/inter/arsoa/add_arsoa.hh?appVer=3.2.0&appKey=6581235709&openid="+openid+"&score="+scoreNum,
-		dataType:"json",
-		success:function(data){
-			if(data.code==0||data.code==102||data.code==103){
-				var status=0;
-				if(data.isAgain!=true){
-					status=1
-				}
-				var isFirst=data.gameCount;
-				if(data.score){
-					showMsg(data.msg+'当前显示为上一轮有效分数！',4000);
-					scoreNum=data.score;
-				}
-				getResult(scoreNum,status,isFirst);
-			}else{
-				showMsg(data.msg);
-			}
-		},
-		error:function(error){
-			console.log(error);
-		}
-	});
 }
 //	创建掉落对象
 var dlwp=[];
@@ -240,7 +198,7 @@ function startgame(){
 		if(mytime<=0){
 			clearInterval(djsTimer);
 			clearInterval(setTimer);
-			postScore(scoreNum);
+			getResult(scoreNum)
 			setTimeout(function(){
 				main.style.display='none';
 				result.style.display='block';
@@ -256,118 +214,6 @@ function startgame(){
 	},1000)
 	var setTimer=setInterval(begin,10)
 }
-function toshare(){
-	$('.toShare').unbind('click')
-	$('.toShare').click(debounce(function(){
-		$('#share').show();
-		$('#share').click(function(){
-			$('#share').hide();
-		})
-	},320))
-}
 window.onload=function(){
 	$('#start').click(startgame)
-}
-var userAgent=window.navigator.userAgent.toLowerCase(),isWeixin = userAgent.indexOf('micromessenger') !== -1,isIos = userAgent.indexOf('iphone') !== -1;
-//微信分享
-if(isWeixin){
-	   var myurl=(window.location.href || document.URL) + "#";
-		var url = "https://lrlz.sinaapp.com/lrlz?uri="+ encodeURIComponent(myurl.substring(0,myurl.indexOf('#'))) +"&callback=";  
-		//begin 微信统计活动数据
-		var jsoninfo=getQueryString('jsoninfo');
-		if (jsoninfo){
-			var userinfo = eval("([" + jsoninfo + "])"); 
-		}else{
-			var userinfo = []; 
-		}
-				
-		tar.init({
-					tar_debug:false,
-					tar_token:"94dced41e93ac5c4e815d9a727b8cf8b",
-					tar_tid: "107827",
-					tar_userinfo:userinfo
-		},userinfo)
-		//end 微信统计活动数据
-		$.ajax({
-					type: "get",
-					url:url,
-					async:true,
-					dataType:"jsonp",
-					success: function(data) {
-					var app_id=data.appid,timestamp=data.timestamp,nonceStr=data.nonceStr, signature=data.signature,appid=data.appid;	
-					  //console.log(data);
-					 wx.config({
-						  debug: false,
-						  appId: app_id,
-						  timestamp: timestamp,
-						  nonceStr: nonceStr,
-						  signature: signature,
-						  jsApiList: [
-							'checkJsApi',
-							'onMenuShareTimeline',
-							'onMenuShareAppMessage',
-							'onMenuShareQQ',
-							'onMenuShareWeibo',
-							'onMenuShareQZone',
-							'getNetworkType',
-							'hideOptionMenu',
-							'showOptionMenu',
-							'chooseWXPay'
-						  ]		  
-					 }); //config end
-				 }
-		})		 
-
-        wx.ready(function(){
-			var shareData = {
-				title: '捡肥皂是一门赚钱的手艺！谁捡谁知道！',
-				desc: '肥皂捡得多,红包大大滴！ 单就捡肥皂,我只服我自己！',
-				link: 'http://m.lrlz.com/h5/activity/arsoa/',
-				imgUrl: 'http://m.lrlz.com/h5/activity/arsoa/images/300-300.jpg',
-				trigger:function(){
-					showMsg('点击分享给好友！')
-				},
-				success:function(res){
-					$.ajax({
-						type:"post",
-						url:"http://lrlzapp.wx.jaeapp.com/app/inter/arsoa/add_share.hh?appVer=3.2.0&appKey=6581235709&openid="+openid,
-						dataType:"json",
-						success:function(data){
-							$('.toShare').unbind('click');
-							$('.toShare').click(debounce(function(){
-								startgame();
-							},320))
-							$('#share').hide();
-						},
-						error:function(error){
-							console.log(error)
-						}
-					});	
-				},
-				cancel:function(res){
-					showMsg('分享已取消！')
-				},
-				fail:function(res){
-					showMsg('分享失败！')
-				}
-			};
-			wx.onMenuShareAppMessage(tar.shapeShareAppMessage(shareData));  	//分享给好友
-	        wx.onMenuShareTimeline(tar.shapeShareAppMessage(shareData)); 
-			wx.onMenuShareQQ(tar.shapeShareAppMessage(shareData)); 	  			//分享到qq
-		    wx.onMenuShareQZone(tar.shapeShareAppMessage(shareData)); 	 	//分享到空间
-		    
-		    //背景音乐
-			function  musicPlay(source){
-			 var audio = new Audio();
-		        audio.src = source;
-				audio.load();
-		        audio.loop = true;
-		        audio.id = 'indexmusic';
-		        audio.autoplay = true;
-		        audio.play();
-				audio.addEventListener('canplay', function(){    audio.play();  }, false);
-				}
-			var source='music/gameon.mp3?v=3';
-				musicPlay(source)
-		});// wxready 
 }
