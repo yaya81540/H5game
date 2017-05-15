@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Sooryehan秀雅韩旗舰店</title>
+		<meta http-equiv="X-UA-Compatible" content="edge,chrome=1" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<!-- 避免转码 -->
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta name="apple-itunes-app" content="app-id=932758491">
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+
+		<meta name="wap-font-scale" content="no" />
+
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		<meta name="format-detection" content="email=no">
+		<meta name="apple-mobile-web-app-title" content="">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" type="text/css" href="css/common.css?v=1"/>
+		<script type="text/javascript">
+			!function(e, t) {function i() {o = 1,e.devicePixelRatioValue = o,s = 1 / o;var t = a.createElement("meta");if (t.setAttribute("name", "viewport"), t.setAttribute("content", "initial-scale=" + s + ", maximum-scale=" + s + ", minimum-scale=" + s + ", user-scalable=no"), d.firstElementChild) d.firstElementChild.appendChild(t);else {var i = a.createElement("div");i.appendChild(t),a.write(i.innerHTML)}}function n() {var e = Math.min(d.getBoundingClientRect().width, 540);r = 100 * e / t.desinWidth,d.style.fontSize = r + "px"}var a = e.document,d = a.documentElement,o = (e.devicePixelRatio, 1),s = 1;i();var l, r = 100;t.desinWidth = 640,t.baseFont = 18,t.init = function() {e.addEventListener("resize",function() {clearTimeout(l),l = setTimeout(n, 300)},!1),e.addEventListener("pageshow",function(e) {e.persisted && (clearTimeout(l), l = setTimeout(n, 300))},!1),"complete" === a.readyState ? a.body.style.fontSize = t.baseFont * o + "px": a.addEventListener("DOMContentLoaded",function() {},!1),n(),d.setAttribute("data-dpr", o)}} (window, window.adaptive || (window.adaptive = {}));
+			window['adaptive'].desinWidth = 750;// 设计图宽度
+			window['adaptive'].init();// 调用初始化方法			
+		</script>
+		<style type="text/css">
+			.rules{float: right;width: 1.3rem;height: 0.4rem;background: rgba(0,0,0,0.4);color: #fff;margin: 0.3rem 0.4rem 0 0;line-height: 0.4rem;border-radius: 0.2rem;text-align: center;}
+			#mask{width: 100%;height: 100%;position: fixed;background: rgba(0,0,0,0.3);left: 0;top: 0;z-index: 99;display: none;}
+			#rules{width: 5.9rem;position: absolute;left: 50%;top: 2.45rem;margin-left: -2.95rem;display: none;}
+			.close{width: 0.78rem;position: absolute;top: -0.45rem;right: 0.3rem;}
+			/*抓精灵游戏*/
+			#game>div{position: relative;}
+			#game>div.bg1>img{position: relative;z-index: 10;}
+			#gameDjs{position: absolute;font-weight: bolder;font-size: 0.9rem;z-index: 15;top: 1.7rem;left: 50%;background: transparent;width: 2.3rem;text-align: center;margin-left: -1.15rem;}
+			#game>div.bg2>img{position: relative;z-index: 20;}
+			#game>div.bg3>img{position: relative;z-index: 30;}
+			#game>div.bg4>img{position: relative;z-index: 40;}
+			#game .rules{position: absolute;right: 0;top: 0;z-index: 12;}
+			.spirit{width: 2.9rem;height: 2.44rem;position: absolute;top: 0;background: url(images/zjlgame/spirit.gif) no-repeat center;background-size: 2.9rem 2.44rem;-webkit-background-size: 2.9rem 2.44rem;}
+			.spirit.catch{top: -2.44rem;background-image: url(images/zjlgame/catch.png);}
+			.spirit.position-1{left: 0.1rem;}
+			.spirit.position-2{left: 2.4rem;}
+			.spirit.position-3{right: -0.1rem;}
+			#game>div.bg2 .spirit{z-index: 15;}
+			#game>div.bg3 .spirit{z-index: 25;}
+			#game>div.bg4 .spirit{z-index: 35;}
+			/*精灵动画*/
+			@-webkit-keyframes outIn{
+				0%{top: 0;}
+				25%{top: -2.44rem;}
+				75%{top: -2.3rem;}
+				100%{top: 0;}
+			}
+			@keyframes outIn{
+				0%{top: 0;}
+				25%{top: -2.44rem;}
+				75%{top: -2.44rem;}
+				100%{top: 0;}
+			}
+			.spiritAnimated{animation: outIn 2s ease infinite;-webkit-animation: outIn 2s ease infinite;}
+			
+			#djs{position: absolute;width: 4.22rem;height: 4.22rem;border-radius: 50%;background: url(images/zjlgame/3.png) no-repeat center #fff;background-size: 2.5rem;left: 50%;margin-left: -2.11rem;top: 3.3rem;display: none;}
+			#tenner{width: 5.9rem;height: 10.23rem;position: absolute;left: 50%;margin-left: -2.95rem;top: 0.65rem;display: none;}
+			#tenner>div{width: 100%;height: 100%;}
+			#tenner .close{top: 2.2rem;}
+			#tenner .success{background: url(images/zjlgame/success.png) no-repeat center; background-size: 100%;}
+			#tenner .lose{background: url(images/zjlgame/lose.png) no-repeat center; background-size: 100%;}
+			#score{width: 0.95rem;position: absolute;left: 50%;bottom: 4.6rem;font-size: 0.6rem;color: #f44400;margin-left: -0.95rem;text-align: center;}
+			#tenner .lose #score{margin-left: -0.8rem;}
+			#tenner .success p,#again{position: absolute;height: 1.32rem;line-height: 1.32rem;width: 3.06rem;background: url(images/zjlgame/input.png) no-repeat center;background-size: 100%;left: 50%;margin-left: -1.53rem;bottom: 2.25rem;}
+			#tenner .success p input{font-size: 0.45rem;width: 3.06rem;transform: rotate(-5deg);text-indent: 10px;border: none;outline: none;background: transparent;}
+			#tenner .success p input::placeholder{color: #838383;}
+			#toTurnplate,#toKnow{position: absolute;width: 3.06rem;left: 50%;margin-left: -1.53rem;bottom: 0.8rem;}
+			/*抓精灵游戏结束*/
+		</style>
+	</head>
+	<body>
+		<noscript>您禁用了浏览器脚本，无法正常预览网页，请允许使用。或者尝试非IE浏览器</noscript>
+		<div id="alert_msg" data-state="false" ></div>
+		<div id="wrap" style="background-image: none;">
+			<div id="game">
+				<span class="rules">查看规则</span>
+				<div class="bg1">
+					<img src="images/zjlgame/bg1.png"/>
+					<div id="gameDjs">20</div>
+				</div>
+				<div class="bg2">
+					<img src="images/zjlgame/bg2.png"/>
+					<div class="spirit position-1"></div>
+					<div class="spirit position-2"></div>
+					<div class="spirit position-3"></div>
+				</div>
+				<div class="bg3">
+					<img src="images/zjlgame/bg3.png"/>
+					<div class="spirit position-1"></div>
+					<div class="spirit position-2"></div>
+					<div class="spirit position-3"></div>
+				</div>
+				<div class="bg4">
+					<img src="images/zjlgame/bg4.png"/>
+					<div class="spirit position-1"></div>
+					<div class="spirit position-2"><</div>
+					<div class="spirit position-3"></div>
+				</div>
+			</div>
+		</div>
+		<div id="mask">
+			<div id="rules"><img src="images/rules.png"/><span class="close"><img src="images/close.png"/></span></div>
+			<div id="djs"></div>
+			<div id="tenner">
+				<!--<div class="success">
+					<span class="close"><img src="images/close.png"/></span>
+					<div id="score"></div>
+					<p><input type="text" name="taobaoId" id="taobaoId" value="" placeholder="输入淘宝昵称"/></p>
+					<div id="toTurnplate"><img src="images/game/turnplate.png"/></div>
+				</div>-->
+				<!--<div class="lose">
+					<span class="close"><img src="images/close.png"/></span>
+					<div id="score">10</div>
+					<div id="again"><img src="images/game/again.png"/></div>
+					<div id="toKnow"><img src="images/game/know.png"/></div>
+				</div>-->
+			</div>
+		</div>
+		<div id="share"></div>
+		<script src="js/jquery-2-0-3.js"></script>
+		<script src="js/zjlgame.js?v=6"></script>
+	</body>
+</html>
