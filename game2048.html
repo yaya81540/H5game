@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>2048</title>
+		<meta http-equiv="X-UA-Compatible" content="edge,chrome=1" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<!-- 避免转码 -->
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+		<meta name="renderer" content="webkit|ie-comp|ie-stand">
+		<meta name="apple-itunes-app" content="app-id=932758491">
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+
+		<meta name="wap-font-scale" content="no" />
+
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="address=no">
+		<meta name="format-detection" content="email=no">
+		<meta name="apple-mobile-web-app-title" content="">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<script type="text/javascript">
+			!function(e, t) {function i() {o = 1,e.devicePixelRatioValue = o,s = 1 / o;var t = a.createElement("meta");if (t.setAttribute("name", "viewport"), t.setAttribute("content", "initial-scale=" + s + ", maximum-scale=" + s + ", minimum-scale=" + s + ", user-scalable=no"), d.firstElementChild) d.firstElementChild.appendChild(t);else {var i = a.createElement("div");i.appendChild(t),a.write(i.innerHTML)}}function n() {var e = Math.min(d.getBoundingClientRect().width, 540);r = 100 * e / t.desinWidth,d.style.fontSize = r + "px"}var a = e.document,d = a.documentElement,o = (e.devicePixelRatio, 1),s = 1;i();var l, r = 100;t.desinWidth = 640,t.baseFont = 18,t.init = function() {e.addEventListener("resize",function() {clearTimeout(l),l = setTimeout(n, 300)},!1),e.addEventListener("pageshow",function(e) {e.persisted && (clearTimeout(l), l = setTimeout(n, 300))},!1),"complete" === a.readyState ? a.body.style.fontSize = t.baseFont * o + "px": a.addEventListener("DOMContentLoaded",function() {},!1),n(),d.setAttribute("data-dpr", o)}} (window, window.adaptive || (window.adaptive = {}));
+			window['adaptive'].desinWidth = 750;// 设计图宽度
+			window['adaptive'].init();// 调用初始化方法			
+		</script>
+		<style type="text/css">
+			*{margin:0; padding:0;-webkit-tap-highlight-color:transparent;}
+			html{font-size:100px;}
+			body{font-family:"微软雅黑",helvetica; margin:0px auto; padding:0px;width:100%;height:100%; max-width:7.5rem; background:#faf8ef; overflow-x:hidden;-webkit-user-select:none;-webkit-text-size-adjust:none;font-size: 0.26rem;color: #776e65;}
+			ul,li,h1,h2,h3,h4,h5,p,input,dl,dt,dd,table,th,td,ol,form,bdo,em,i,strong{margin:0;padding:0;list-style:none;}
+			em,b,i{font-style: normal;}
+			img{ border:0; vertical-align:top;max-width: 100%;display: block; margin: 0 auto;}
+			h1 img,h2 img,h3 img,h4 img,h5 img,h6 img{display: inline-block;}
+			a:link,a:visited{ text-decoration:none; color:#333;} a:hover{ text-decoration:none;}
+			
+			#wrap{width: 290px;margin: 0.4rem auto;}
+			.header{overflow: hidden;}
+			.header .title{font-size: 0.5rem;font-weight: bold;display: inline;}
+			.header .box{float: right;min-width: 1.2rem;background: #bbada0;height: 1.1rem;margin-left: 0.1rem;color: #eee4da;text-align: center;line-height: 0.4rem;border-radius: 0.1rem;}
+			.header .box p{font-size: 0.5rem;color: #fff;line-height: 0.7rem;}
+			#start{background: #8f7a66;color: #fff;height: 0.7rem;margin: 0.2rem;text-align: center;font-size: 0.4rem;line-height: 0.7rem;border-radius: 0.1rem;}
+			.container{width: 270px;height: 270px;padding: 10px;background: #bbada0;border-radius: 10px;overflow: hidden;position: relative;}
+			#game_main{width: 270px;height: 270px;position: absolute;left: 10px;top: 10px;}
+			.game_row{margin-bottom: 10px;white-space: nowrap;overflow: hidden;}
+			.game_cell{width: 60px;height: 60px;background: rgba(238, 228, 218, 0.35);margin-right: 10px;float: left;border-radius: 5px;}
+			.game_cell:last-child{margin: 0;}
+			.grid{width: 60px;height: 60px;font-size: 30px;font-weight: bold;line-height: 60px;text-align: center;border-radius: 5px;position: absolute;-webkit-transition: 100ms ease-in-out;-moz-transition: 100ms ease-in-out;transition: 100ms ease-in-out;-webkit-transition-property: -webkit-transform;-moz-transition-property: -moz-transform;transition-property: transform;}
+			.gridNum-2{background: #eee4da;}
+			.gridNum-4{background: #ede0c8;}
+			.gridNum-8{background: #f2b179;color: #f9f6f2;}
+			.gridNum-16{background: #f59563;color: #f9f6f2;}
+			.gridNum-32{background: #f67c5f;color: #f9f6f2;}
+			.gridNum-64{background: #f65e3b;color: #f9f6f2;}
+			.gridNum-128{background: #edcf72;color: #f9f6f2;}
+			.gridNum-256{background: #edcc61;color: #f9f6f2;}
+			.gridNum-512{background: #edcb50;color: #f9f6f2;}
+			.gridNum-1024{background: #edca3f;color: #f9f6f2;}
+			.gridNum-2048{background: #dcb961;color: #f9f6f2;}
+			.gridP-1-1{transform: translate(0px,0px);}
+			.gridP-1-2{transform: translate(0px,70px);}
+			.gridP-1-3{transform: translate(0px,140px);}
+			.gridP-1-4{transform: translate(0px,210px);}
+			.gridP-2-1{transform: translate(70px,0px);}
+			.gridP-2-2{transform: translate(70px,70px);}
+			.gridP-2-3{transform: translate(70px,140px);}
+			.gridP-2-4{transform: translate(70px,210px);}
+			.gridP-3-1{transform: translate(140px,0px);}
+			.gridP-3-2{transform: translate(140px,70px);}
+			.gridP-3-3{transform: translate(140px,140px);}
+			.gridP-3-4{transform: translate(140px,210px);}
+			.gridP-4-1{transform: translate(210px,0px);}
+			.gridP-4-2{transform: translate(210px,70px);}
+			.gridP-4-3{transform: translate(210px,140px);}
+			.gridP-4-4{transform: translate(210px,210px);}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="header"><div class="title">2048</div><div class="box">最高分数<p id="highscore">0</p></div><div class="box">我的分数<p id="myscore">0</p></div></div>
+			<div id="start" onclick="startGame();">开始游戏</div>
+			<div class="container">
+				<div class="game_bg">
+					<div class="game_row">
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+					</div>
+					<div class="game_row">
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+					</div>
+					<div class="game_row">
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+					</div>
+					<div class="game_row">
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+						<div class="game_cell"></div>
+					</div>
+				</div>
+				<div id="game_main"></div>
+			</div>
+		</div>
+	</body>
+	<script src="js/game2048.js"></script>
+</html>
