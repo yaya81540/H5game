@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,shrink-to-fit=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>消灭宝石</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-2.1.1.min.js" type="application/javascript" language="javascript"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+wx.config({
+    appId: 'wxe38890fa25b791ad',
+    timestamp: 1501568877,
+    nonceStr: 'naVSZIYaAo611g2r',
+    signature: '70b825cb50583a49c3cce9ad8b6bf51ce493f68c',
+    jsApiList: [
+		// 所有要调用的 API 都要加到这个列表中
+		'checkJsApi',
+		'onMenuShareTimeline',
+		'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+    ]
+});
+
+function share(title, link, imgUrl, desc) {
+    wx.ready(function () {
+        wx.onMenuShareTimeline({
+            title: title, // 分享标题
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareAppMessage({
+    		title: title, // 分享标题
+    		desc: desc, // 分享描述
+    		link: link, // 分享链接
+    		imgUrl: imgUrl, // 分享图标
+    		type: 'link', // 分享类型,music、video或link，不填默认为link
+    		dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+    		success: function () {
+    			// 用户确认分享后执行的回调函数
+				//alert(title);
+                //window.location.href=link+"&share=1";
+    		},
+    		cancel: function () {
+    			// 用户取消分享后执行的回调函数
+    		}
+    	});
+        wx.onMenuShareQQ({
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+               // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+               // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareWeibo({
+            title: title, // 分享标题
+            desc: desc, // 分享描述
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+               // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+}
+
+//朋友圈分享
+function share_timeline(title, link, imgUrl) {
+    wx.ready(function () {
+        wx.onMenuShareTimeline({
+            title: title, // 分享标题
+            link: link, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+}
+</script>    <script>
+//微信分享
+        var url = 'http://dofgame.cn/mobile/gametest/?id=4460&fuid=183253589&funame=匿名183253589';
+        // var pic = 'http://dofgame.cn/qushangyun/mobile/game83/' + 'monkey.png';
+        var pic = "http://dofgame.cn/upload/2016/0812/14709879219461.png";
+        var share_titile = "消灭宝石";
+        var share_desc = "消灭宝石送情人，打单身狗就在这里，超级好玩，着急虐狗的游戏。";
+        share(share_titile, url, pic, share_desc);
+
+        jQuery(function(){
+        var id = '4460';
+        var mid = "2692";
+        var pid = '0';
+        jQuery.post('http://dofgame.cn/mobile/gametest/insert_pvuv?1501568877', { id:id, mid:mid, pid:pid ,type:'game'}, function(data){
+
+        }, 'json');
+
+    });
+</script>
+<script>
+//用户ID
+var _vsds_uid = "183253589";
+//用户姓名
+var _vsds_name = "匿名183253589";
+//用户性别
+var _vsds_sex = '1';
+//省份
+var _vsds_province = '';
+//城市
+var _vsds_city = '';
+//分享者ID
+var _vsds_share_uid = "";
+//分享者姓名
+var _vsds_share_name = "";
+if(_vsds_sex=='1'){
+    _vsds_sex = '男';
+}else if(_vsds_sex=='2'){
+    _vsds_sex = '女';
+}else{
+    _vsds_sex = '未知';
+}
+// var sid = "403";
+    //alert(_vsds_uid);alert(_vsds_name);alert(_vsds_sex);alert(_vsds_province);alert("403");
+</script>
+ <script type="text/javascript">
+
+        var imgsrc="http://dofgame.cn/qushangyun/mobile/game83/";
+        var file="http://dofgame.cn/upload/";
+        var userData={
+            /*******user_game-start*****************/
+            "share_title":"消灭宝石",//游戏前分享标题
+            "share_desc":"消灭宝石送情人，打单身狗就在这里，超级好玩，着急虐狗的游戏。",//游戏前分享描述
+            "share_img":"http://dofgame.cn/upload/2016/0812/14709879219461.png",//分享窗口图片
+            "over_share_title":"消灭宝石",//游戏结束后分享标题
+            "over_share_desc":"逗粉游戏，祝大家七夕节快乐，有情人终成眷属!",//游戏结束后描述
+
+            "logo":"http://dofgame.cn/upload/2016/0812/14709887813782.png",//加载页面logo
+            "loading_page":"http://dofgame.cn/upload/2016/0812/14709887879001.jpg",//加载页面背景
+            "game_tips":"逗粉游戏   欢乐无限",//加载页面欢迎词
+            "word_color":"#f6eeee",//加载欢迎词颜色
+            "bg_music":"http://dofgame.cn/upload/2016/0812/14709918437608.wav",//背景音乐
+            "game_ad":"http://dofgame.cn/upload/2016/0812/14709890368035.png",//广告图片
+            /*******user_game-end*****************/
+
+            /******game_set-start*********/
+            "startBackground":"",//开始页面背景图片
+            "startButton":"http://dofgame.cn/upload/2016/0812/14709889782359.png",//开始按钮
+            "start_logo":"http://dofgame.cn/upload/2016/0812/14709889848835.png",//开始游戏页面标题logo
+            "is_start_text":"1",//提示文案是否显示
+            "start_text":"消灭宝石送情人，打单身狗就在这里，超级好玩，着急虐狗的游戏。",//提示文案
+            "start_color":"#ffffff",//提示文案颜色
+            "gameBackground":"http://dofgame.cn/upload/2016/0812/14709890490147.png",//游戏背景
+            /**道具一到*/
+            "daoju1":"http://dofgame.cn/upload/2016/0812/14709890666476.png",
+            "daoju2":"http://dofgame.cn/upload/2016/0812/14709890961446.png",
+            "daoju3":"http://dofgame.cn/upload/2016/0812/14709890781537.png",
+            "daoju4":"http://dofgame.cn/upload/2016/0812/14709891030254.png",
+            "daoju5":"http://dofgame.cn/upload/2016/0812/14709891093893.png",
+            "daoju6":"http://dofgame.cn/upload/2016/0812/14709891165224.png",
+            "daoju7":"http://dofgame.cn/upload/2016/0812/14709891431203.png",
+            "daoju8":"",
+            "daoju9":"",
+            "daoju10":"",
+            /**道具十到*/
+            "endBackground":"http://dofgame.cn/upload/2016/0812/14709892043940.png",//结束页面文案显示弹窗
+            "againButton":"http://dofgame.cn/upload/2016/0812/14709892111374.png",//再来一次按钮
+            "shareButton":"http://dofgame.cn/upload/2016/0812/14709892171573.png",//分享按钮
+            "userButton":"http://dofgame.cn/upload/2016/0812/14709892222126.png",//用户自定义按钮
+            "over_word_text":"逗粉游戏，祝大家七夕节快乐，有情人终成眷属!",//结束文案
+            "over_word_color":"#ffffff",//结束(分数|文案)颜色
+
+            "oursrc":"http://mp.weixin.qq.com/s?__biz=MzIxNzAyMTc2Ng==&mid=209414503&idx=1&sn=914bf1c5f427447aba4431386848e537&scene=0&key=dffc561732c2265153cd405904c39c0cdad252f3566fc8e79ca4e3b6a132c1c8ef2322b2bc822256f33849f24cea7538&ascene=1&uin=MTUzOTI5ODgyMw%3D%3D&devicetype=Windows+7&version=6102002a&pass_ticket=NwhtFLelT0JwGjr22X%2B6ICiq7ncDQdW9BHuDDpt1Bkv1HjHAraStnbhQewdBijOH",
+
+
+            /******game_set-end*********/
+
+        }
+
+        // var adsrc = "http://dofgame.cn/upload/2016/0812/14709890368035.png";
+        // var oursrc="http://mp.weixin.qq.com/s?__biz=MzIxNzAyMTc2Ng==&mid=209414503&idx=1&sn=914bf1c5f427447aba4431386848e537&scene=0&key=dffc561732c2265153cd405904c39c0cdad252f3566fc8e79ca4e3b6a132c1c8ef2322b2bc822256f33849f24cea7538&ascene=1&uin=MTUzOTI5ODgyMw%3D%3D&devicetype=Windows+7&version=6102002a&pass_ticket=NwhtFLelT0JwGjr22X%2B6ICiq7ncDQdW9BHuDDpt1Bkv1HjHAraStnbhQewdBijOH";
+        var btn_name = userData.userButton;//结束后自定义图片地址
+                //关注逗粉
+        var activityType=0;
+        var web_src =userData.oursrc;
+              var gameParameter={
+                  "url":url,
+                  "pic":pic,
+                  "gameID":4460,
+                  "templateID":83,
+                  "rankURL":"http://dofgame.cn/mobile/gametest/ranklist",
+                  "scoreURL":"http://dofgame.cn/mobile/gametest/get_game_score",//分数保存
+                  "hitURL":"http://dofgame.cn/mobile/gametest/game_rank",//最高分打败多少人
+            }
+    </script>
+</head>
+<body>
+
+
+    <div id="stage"></div>
+    <script>
+        // var imgsrc = "";
+        // var loadingTXT = "逗粉游戏  欢乐无限";//加载页面文字
+        // var loading_COLOR = "#FFF";
+        // var hasStartBg = false;//首页是否有背景图
+        // var attentionAddr = "http://www.baidu.com";//关注地址
+        // var startTXT = "七夕到了，消灭宝石，收集礼物，小心单身狗会来抢哦。";//开始界面文案
+        // var start_COLOR = "#000";
+        // var endTXT = "逗粉游戏，欢乐无限！祝您七夕节快乐！";//结束弹窗文案
+        // var endTXT_COLOR = "#fff";//结束弹窗文案颜色
+
+
+        var loadingTXT =userData.game_tips;//加载页面文字
+        var loading_COLOR = userData.word_color;
+        var hasStartBg = false;//首页是否有背景图
+        var startTXT = userData.start_text;//开始界面文案//is_start_text是否显示
+        var start_COLOR = userData.start_color;
+        var endTXT = userData.over_word_text;//结束弹窗文案
+        var endTXT_COLOR = userData.over_word_color;//结束弹窗文案颜色
+        var attention_addr = web_src;//关注地址
+    </script>
+    <script src="js/lufylegend-1.10.1.min.js" type="application/javascript" language="javascript"></script>
+    <script src="js/Funcs.js" type="application/javascript" language="javascript"></script>
+    <script src="js/game.js" type="application/javascript" language="javascript"></script>
+    <script>
+        LInit(16,"stage",640,960,main);
+    </script>
+
+
+    <script>
+        var beat = 0;//击败人数
+        var best = 0;//最好成绩
+        //刷新排行榜
+        function resetRank(){
+            var gameid = gameParameter.gameID;
+            var tid = gameParameter.templateID;
+            $.post(gameParameter.scoreURL,{phone:0,score:gameData.point,tid:tid,id:gameid},function(data,textStatus,xhr){
+
+            });
+
+            $.post(gameParameter.hitURL,{score:gameData.point,id:gameid,tid:tid}, function(data, textStatus, xhr) {
+
+                if(data.score_rank=='0.00'){
+                    data.score_rank=1;
+                }
+                beat = parseInt(data.score_rank);
+                best = parseInt(data.bestScore);
+                endInit();
+                // userData.over_share_desc,over_share_title,share_img,share_title,share_desc
+                var desc = "我在游戏中得到"+gameData.point+"分,目前最高是"+best+"分,打败全国"+beat+"%的人,"+userData.over_share_desc;
+                share(userData.over_share_title, gameParameter.url, gameParameter.pic, desc);
+                share_timeline(desc, gameParameter.url, gameParameter.pic);
+            },'json');
+        }
+    </script>
+
+    <audio src="http://dofgame.cn/upload/2016/0812/14709918437608.wav" autoplay="autoplay" loop="loop" id="startbg"></audio>
+</body>
+</html>

@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0; padding:0; font-family:"Microsoft YaHei", "微软雅黑",arial, helvetica, sans-serif; -webkit-box-sizing: border-box;box-sizing: border-box;}
+html{ font-size:62.5%; height: 100%;}
+body{ font-size:1.4rem; height: 100%;}
+a{ text-decoration:none; border:none;}
+li{ list-style:none;}
+input{ -webkit-appearance:none; border-radius:0;}
+select{ -webkit-appearance:select; border-radius:0;}
+
+.cover{ width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); position: fixed; top: 0; left: 0; z-index: 100;}
+canvas{display: block;}
+
+#loading{ width: 100%; height: 100%; background-color: #3c384a; position: fixed; top: 0; left: 0; z-index: 100; background-repeat: no-repeat; background-size: 100% 100%;}
+#animation{ width: 46%; margin: 35% auto 20% auto; position: relative;}
+#animation img{ width: 100%; display:block;}
+#animation div{ border-radius:50%; overflow:hidden;transform:scale(0.9,0.9); -webkit-transform:scale(0.9,0.9);}
+#animation div img{ border-radius:50%;}
+#animation img:nth-child(2){ position: absolute; top: 0; left: 0; animation:load 3s linear infinite; -webkit-animation:load 3s linear infinite;}
+@keyframes load{
+    0%{transform:rotateZ(0deg);}
+    100%{transform:rotateZ(360deg);}
+}
+@-webkit-keyframes load{
+    0%{-webkit-transform:rotateZ(0deg);}
+    100%{-webkit-transform:rotateZ(360deg);}
+}
+#loading p{ color: #FFF; text-align: center; font-size: 18px;}
+
+
+#share{ display: none;}
+#share img{ width: 50%; float: right; margin: 5% 5% 0 0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
