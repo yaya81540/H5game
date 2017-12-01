@@ -15,12 +15,12 @@ NumTo.prototype.init=function(){
 			return
 		}
 		for(var i=0;i<mynum.length-1;i++){
-//			if(mynum[i].num==2048)alert('you win!');return
+			if(mynum[i].num==2048){alert('you win!');return}
 			if(mynum[i].posX==this.posX&&mynum[i].posY==this.posY)return false
 		}
 		return true
 	}
-	console.log(!isNewPosition());
+//	console.log(!isNewPosition());
 	while(!isNewPosition()){
 		console.log(this.posX+'-'+this.posY)
 		this.posX=parseInt(Math.random()*4+1);
@@ -40,10 +40,25 @@ function toMove(direction){
 		case 'left':xMove([1,2,3,4]);break;
 		case 'right':xMove([4,3,2,1]);
 	}
-	console.log(mynum)
 }
 var arr=[[],[],[],[]];
 var delet=[];
+function noMove(direction){
+	var compare=0,dire='',pos=0;
+	switch(direction){
+		case 'top':compare=-1;dire='y';break;
+		case 'bottom':compare=1;dire='y';break;
+		case 'left':compare=-1;dire='x';break;
+		case 'right':compare=1;dire='x';
+	}
+	arr=[[],[],[],[]];
+	delet=[];
+	for(i in mynum){
+		for(var j=0;j<4;j++){
+			if(mynum[i].posX==j+1)arr[j].push(i);
+		}
+	}
+}
 //纵向移动
 function yMove(pos){//pos为数组[1,2,3,4]或 [4,3,2,1]
 	var order=''
@@ -60,6 +75,8 @@ function yMove(pos){//pos为数组[1,2,3,4]或 [4,3,2,1]
 			if(mynum[i].posX==j+1)arr[j].push(i);
 		}
 	}
+	console.log(mynum)
+	console.log(arr)
 	for(i in arr){
 		if(arr[i].length==1){
 			mynum[arr[i][0]].posY=pos[0];
@@ -131,7 +148,6 @@ function xMove(pos){//pos为数组[1,2,3,4]或 [4,3,2,1]
 		order='big';
 	}
 	mynum.sort(rank('posX',order)).sort(rank('posY','small'))
-	console.log(mynum)
 	arr=[[],[],[],[]];
 	for(i in mynum){
 		for(var j=0;j<4;j++){
@@ -139,7 +155,6 @@ function xMove(pos){//pos为数组[1,2,3,4]或 [4,3,2,1]
 		}
 	}
 	for(i in arr){
-		console.log(arr[i])
 		if(arr[i].length==1){
 			mynum[arr[i][0]].posX=pos[0];
 		}else if(arr[i].length==2){
@@ -225,12 +240,14 @@ function rank(name,order){//posX||posY
 var mynum=[];
 var start=end=null;
 function startGame(){
-	for(var i=0;i<2;i++){
-		mynum[i]=new NumTo();
-		mynum[i].init();
-		mynum[i].writeIn();
-		game_main.appendChild(mynum[i].odiv);
-	}
+	mynum[0]=new NumTo();
+	mynum[0].init();
+	mynum[0].writeIn();
+	game_main.appendChild(mynum[0].odiv);
+	mynum[1]=new NumTo();
+	mynum[1].init();
+	mynum[1].writeIn();
+	game_main.appendChild(mynum[1].odiv);
 	game_main.addEventListener('touchstart',mytouch,false)
 }
 function mytouch(event){
@@ -240,17 +257,28 @@ function mytouch(event){
 	game_main.addEventListener('touchstart',mytouch,false)
 }
 function mytouchend(event){
+	
 	end=event.changedTouches[0];
+	var direction='';
 	if(start.clientX<end.clientX&&Math.abs(start.clientX-end.clientX)>Math.abs(start.clientY-end.clientY)){
-		toMove('right');
-	}else if(start.clientX>end.clientX&&Math.abs(start.clientX-end.clientX)>Math.abs(start.clientY-end.clientY)){toMove('left');}
-	else if(start.clientY<end.clientY&&Math.abs(start.clientX-end.clientX)<Math.abs(start.clientY-end.clientY)){toMove('bottom');}
-	else if(start.clientY>end.clientY&&Math.abs(start.clientX-end.clientX)<Math.abs(start.clientY-end.clientY)){toMove('top');}	
-	mynum.push(new NumTo());
-	mynum[mynum.length-1].init();
-	game_main.innerHTML='';
-	for(i in mynum){
-		mynum[i].writeIn();	
+		direction='right';
+	}else if(start.clientX>end.clientX&&Math.abs(start.clientX-end.clientX)>Math.abs(start.clientY-end.clientY)){direction='left';}
+	else if(start.clientY<end.clientY&&Math.abs(start.clientX-end.clientX)<Math.abs(start.clientY-end.clientY)){direction='bottom';}
+	else if(start.clientY>end.clientY&&Math.abs(start.clientX-end.clientX)<Math.abs(start.clientY-end.clientY)){direction='top';}	
+	if(noMove(direction)){
+		alert('该方向已无法移动！')
+	}else{
+		toMove(direction);
+		setTimeout(function(){
+			mynum.push(new NumTo());
+			mynum[mynum.length-1].init();
+			game_main.innerHTML='';
+			for(i in mynum){
+				mynum[i].writeIn();	
+			}
+			document.removeEventListener('touchend',mytouchend,false)
+		},200)
 	}
-	document.removeEventListener('touchend',mytouchend,false)
+	
+	
 }
