@@ -23,7 +23,7 @@ var imgData = [
     {name:"tointroduce",path:"images/game/tointroduce.png"},
     {name:"success",path:"images/game/success.png"},
     {name:"again",path:"images/game/again.png"},
-    {name:"share",path:"http://m.lrlz.com/h5/activity/fcjactivity/images/wx_share.png"},
+    // {name:"share",path:"http://m.lrlz.com/h5/activity/fcjactivity/images/wx_share.png"},
     
 ];
 function main(){
@@ -460,11 +460,11 @@ var pumpkin = {
 function setCenter(){
     return (LGlobal.width-this.getWidth())/2;
 }
-$('#mask').click(debounce(function(){
+$('#mask').click(function(){
 	console.log('哈喽')
 	$('#mask').hide()
 	init(50,'gamebox',750,1206,main)
-},320))
+})
 
 
 //获取游戏结果
